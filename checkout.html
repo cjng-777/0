@@ -529,7 +529,19 @@ iframe.addEventListener("load", () => {
 </script>
 </section>
 
+<script>
+window.addEventListener("message", function(event) {
 
+  if (event.origin !== "https://novie.in") return;
+
+  if (event.data.type === "altura") {
+    const iframe = document.getElementById("secureFrame");
+
+    iframe.style.height = event.data.height + "px";
+  }
+
+});
+</script>
 
 
 
