@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-  <link href="st.css" rel="stylesheet">
+   <link href="st.css" rel="stylesheet">
 <link rel="icon" href="favi.png" type="image/x-icon">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
@@ -23,7 +23,6 @@ body{
 
 /* GALERÍA */
 .gallery{
-  display:flex;
   gap:15px;
 }
 
@@ -217,6 +216,195 @@ button{
     width: 100%;
   }
 }
+
+
+.product{
+  display:flex;
+  gap:40px;
+  max-width:1100px;
+  margin:auto;
+  font-family:Arial;
+}
+
+.gallery img{
+  width:400px;
+  border-radius:15px;
+}
+
+.info{
+  max-width:500px;
+}
+
+.gen{
+  color:#777;
+  margin-bottom:10px;
+}
+
+.price{
+  font-size:28px;
+  color:#27ae60;
+  margin:15px 0;
+}
+
+select{
+  width:100%;
+  padding:12px;
+  border-radius:8px;
+  margin-bottom:15px;
+}
+
+.add-to-cart{
+  width:100%;
+  padding:14px;
+  background:black;
+  color:white;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.add-to-cart:hover{
+  background:#27ae60;
+}
+
+.badges{
+  display:flex;
+  gap:10px;
+  color: black;
+  margin:15px 0;
+}
+
+.badges span{
+  background:#f1f1f1;
+  padding:8px 10px;
+  border-radius:8px;
+  font-size:12px;
+}
+
+.stats{
+  display:flex;
+  gap:20px;
+  color: black;
+  margin:20px 0;
+}
+
+.stats div{
+  background:#fafafa;
+  padding:10px;
+  border-radius:10px;
+  text-align:center;
+}
+
+.tabs-head{
+  display:flex;
+  gap:20px;
+  cursor:pointer;
+  border-bottom:2px solid #eee;
+}
+
+.tabs-head div{
+  padding:10px;
+}
+
+.tabs-head .active{
+  border-bottom:2px solid black;
+  font-weight:bold;
+}
+
+.tab{
+  display:none;
+  padding:15px 0;
+}
+
+.tab.active{
+  display:block;
+}
+/* ===== MOBILE ===== */
+@media (max-width: 768px){
+
+  .product{
+    flex-direction: column;
+    gap:20px;
+    padding:15px;
+  }
+
+  .gallery img{
+    width:100%;
+    max-width:100%;
+  }
+
+  .info{
+    max-width:100%;
+  }
+
+  .price{
+    font-size:24px;
+    text-align:left;
+  }
+
+  select{
+    font-size:16px;
+  }
+
+  .add-to-cart{
+    font-size:16px;
+    padding:16px;
+  }
+
+  .badges{
+    flex-wrap:wrap;
+    gap:8px;
+  }
+
+  .badges span{
+    font-size:11px;
+    padding:6px 8px;
+  }
+
+  .stats{
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .stats div{
+    display:flex;
+    justify-content:space-between;
+    padding:12px;
+  }
+
+  .tabs-head{
+    justify-content:space-around;
+  }
+
+  .tabs-head div{
+    font-size:14px;
+  }
+
+  .tab{
+    font-size:14px;
+    line-height:1.5;
+  }
+
+}
+.main-image{
+  padding:3px; /* grosor del borde */
+  border-radius:18px;
+  background:linear-gradient(145deg,
+    #d4af37 0%,
+    #f5e6a8 20%,
+    #c9a74e 40%,
+    #b8962e 60%,
+    #f5e6a8 80%,
+    #d4af37 100%
+  );
+}
+
+.main-image img{
+  width:100%;
+  border-radius:15px;
+  display:block;
+}
 </style>
 </head>
 
@@ -244,72 +432,119 @@ button{
 <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 <br><br>
 
+
+
+
+
+
+
+
+
+
 <div class="product">
 
   <!-- GALERÍA -->
   <div class="gallery">
-
-    <div class="thumbs">
-      <img src="1/7.png" class="active" onclick="changeImg(this)">
-      <img src="1/8.png" onclick="changeImg(this)">
-
-    </div>
-
     <div class="main-image">
-      <img id="mainImg" src="1/7.png">
+  <img id="mainImg" src="2/2CB.png">
     </div>
-
   </div>
+  <!-- MINIATURAS -->
+  <div class="thumbs">
+    <img src="2/2CB.png" class="active" onclick="changeImg(this)">
+   </div>
 
   <!-- INFO -->
-<div class="info">
-  <h1>Pineapple Express 1G</h1>
-
-  <div class="price">$150</div>
   
+  <!-- INFO -->
+ <div class="info">
+  <h1>2CB</h1>
+  <p class="gen">Primera calidad</p>
+
+  <div class="price">$250</div>
+
+  <!-- SELECT -->
   <select class="sabor-select">
     <option value="">Selecciona opción</option>
-    <option value="1 unidad" data-precio="150">1 unidad $150</option>
-    <option value="5 unidades" data-precio="625">5 unidades $625</option>
-    <option value="10 unidades" data-precio="1000">10 unidades $1000</option>
+    <option value="1 gramo" data-precio="250">1 G de Tusi $250 </option>
+    <option value="1 onza" data-precio="5600">1 Oz de Tusi $5600</option>
+
   </select>
 
   <button class="add-to-cart"
-    data-nombre="Pineapple Express 1G"
-    data-imagen="1/7.png">
+    data-nombre="2cb"
+    data-imagen="2/era.png">
     AÑADIR AL CARRITO
   </button>
 
-    <!-- TABS -->
-    <div class="tabs">
+  <!-- BADGES -->
+  <div class="badges">
+    <span>🚚 Envío Gratis</span>
+    <span>🔒 Envío Discreto</span>
+    <span>↩️ Devoluciones</span>
+  </div>
 
-      <div class="tabs-head">
-        <div class="active" onclick="tab(event,'d')">Descripción</div>
-        <div onclick="tab(event,'i')">Información adicional</div>
-        <div onclick="tab(event,'r')">Certificado de laboratorio.</div>
-      </div>
+  <!-- TABS -->
+  <div class="tabs">
 
-      <!-- DESCRIPCIÓN -->
-      <div id="d" class="tab active">
-        <p>
-       Una variedad maestra que cruza entre sus padres Trainwreck y Hawaiian conduce a su sabor a cítricos tropicales infundido con piña. Nuestro Pineapple Express es perfecto después de un largo día para relajarse, y ver la clásica película de Pineapple Express.
-      </div>
-
-      <!-- INFO -->
-      <div id="i" class="tab">
-    <p>Un agradable para la multitud desde el principio, nuestros cartuchos premium están diseñados para proporcionar la experiencia de fumar más elevada. Meticulosamente elaborados y hechos con terpenos derivados del cáñamo para ofrecer un perfil de sabor equilibrado, estas gemas te llevarán en un viaje como ningún otro. Estos cartuchos son compatibles con cualquier dispositivo de 510 hilos, y establecen el estándar de oro como ningún otro.</p>
-      </div>
-
-      <!-- RESEÑAS -->
-        <div id="r" class="tab">
-    <p> <br><a href="pdf/PineappleExpress.pdf" download>Descargar PDF</a> </p>
-      </div>
+    <div class="tabs-head">
+      <div class="active" onclick="tab(event,'d')">Descripción</div>
 
     </div>
+
+    <!-- DESCRIPCIÓN -->
+    <div id="d" class="tab active">
+      <p>
+El 2C-B se llama químicamente 4-bromo-2,5-dimetoxifenetilamina.
+<br>
+Es una droga sintética (hecha en laboratorio) que pertenece a las fenetilaminas.   </p>
+    </div>
+
+
 
   </div>
 
 </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
